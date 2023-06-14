@@ -1,43 +1,39 @@
 <?php
-require_once("connection.php");
+require "connection.php";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $ssn = $_POST["ssn"];
-    $name = $_POST["name"];
-    $specialty = $_POST["specialty"];
-    $experience = $_POST["experience"];
-    $email = $_POST["email"];
+    $FName = $_POST["FName"];
+    $LName = $_POST["LName"];
+    $SSN = $_POST["SSN"];
+    $Speciality = $_POST["Speciality"]; 
+    $Experience = $_POST["Experience"];
+    $Email = $_POST["Email"];
+    
+    $sql = "INSERT INTO doctor (FName, LName, SSN, Speciality, Experience, Email)
+             VALUES ('$FName', '$LName', '$SSN', '$Speciality', '$Experience', '$Email')";
+   
+   echo "<br>";
 
-    // Prepare and execute the SQL statement
-    $stmt = $conn->prepare("INSERT INTO doctors (ssn, name, specialty, experience, email) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("issis", $ssn, $name, $specialty, $experience, $email);
-    $stmt->execute();
-
-    if ($stmt->affected_rows > 0) {
-        echo "Data inserted successfully!";
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
     } else {
-        echo "Error inserting data.";
+        echo "Error: " . $sql . "<br>" . $conn->error;
     }
-
-    $stmt->close();
+    $conn->close();
 }
-
-$conn->close();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
