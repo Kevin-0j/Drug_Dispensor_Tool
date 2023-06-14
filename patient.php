@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "<br>";
 
     if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
+        echo "Patient registered successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
