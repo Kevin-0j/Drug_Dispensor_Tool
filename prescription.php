@@ -1,23 +1,22 @@
 <?php
-require_once("connection.php");
+require"connection.php";
 
 // Retrieve form data
 $prescription_id = $_POST['prescription_id'];
 $description = $_POST['description'];
-$patientssn = $_POST['patientssn'];
-$doctorssn = $_POST['doctorssn'];
+$patientssn = $_POST['patient_ssn'];
+$doctorssn = $_POST['doctor_ssn'];
 
-// Prepare and execute the SQL statement
-$stmt = $conn->prepare("INSERT INTO prescriptions (prescription_id, description, patientssn, doctorssn) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("isss", $prescription_id, $description, $patientssn, $doctorssn);
-$stmt->execute();
+$sql = "INSERT INTO prescription(prescription_id, description, patient_ssn,doctor_ssn)
+        VALUES ('$prescription_id', '$description', '$patientssn','$doctorssn')";
 
-if ($stmt->affected_rows > 0) {
-    echo "Prescription inserted successfully!";
-} else {
-    echo "Error inserting prescription.";
-}
+    echo "<br>";
 
-$stmt->close();
-$conn->close();
+    if ($conn->query($sql) === TRUE) {
+        echo "Prescription submitted successfully!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    $conn->close();
+
 ?>

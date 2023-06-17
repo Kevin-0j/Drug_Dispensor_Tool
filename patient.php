@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = $_POST['address'];
     $medicalHistory = $_POST['medical_history'];
 
-    $sql = "INSERT INTO patient (FName, LName, SSN, P_Address, MedicalHistory)
+    $sql = "INSERT INTO patient (first_name, last_Name, ssn, address, medical_history)
             VALUES ('$firstName', '$lastName', '$ssn', '$address', '$medicalHistory')";
 
     echo "<br>";

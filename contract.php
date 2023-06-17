@@ -1,23 +1,22 @@
 <?php
-require_once("connection.php");
+require "connection.php";
 
-// Retrieve form data
-$contract_id = $_POST['contract_id'];
-$startdate = $_POST['startdate'];
-$enddate = $_POST['enddate'];
-$pharmacyid = $_POST['pharmacyid'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $contract_id = $_POST['contract_id'];
+    $start_date = $_POST['start_date'];
+    $end_date = $_POST['end_date'];
+    $pharmacy_id = $_POST['pharmacy_id'];
 
-// Prepare and execute the SQL statement
-$stmt = $conn->prepare("INSERT INTO contracts (contract_id, startdate, enddate, pharmacyid) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("issi", $contract_id, $startdate, $enddate, $pharmacyid);
-$stmt->execute();
+    $sql = "INSERT INTO contract(contract_id, start_date, end_date,pharmacy_id)
+            VALUES ('$contract_id', '$start_date', '$end_date','$pharmacy_id')";
 
-if ($stmt->affected_rows > 0) {
-    echo "Data inserted successfully!";
-} else {
-    echo "Error inserting data.";
+    echo "<br>";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Company registered successfully!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    $conn->close();
 }
-
-$stmt->close();
-$conn->close();
 ?>

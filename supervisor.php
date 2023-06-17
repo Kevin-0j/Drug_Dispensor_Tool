@@ -3,11 +3,12 @@ require 'connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $supervisorID = $_POST['supervisor_id'];
-    $supervisorName = $_POST['supervisor_name'];
-    $phoneNo = $_POST['phoneNo'];
+    $FirstName = $_POST['first_name'];
+    $LastName = $_POST['last_name'];
+    $phone_number = $_POST['phone_number'];
 
-    $sql = "INSERT INTO supervisors (SupervisorID, SupervisorName, PhoneNo)
-            VALUES ('$supervisorID', '$supervisorName', '$phoneNo')";
+    $sql = "INSERT INTO supervisor(supervisor_id, first_name, last_name, phone_number)
+            VALUES ('$supervisorID', '$FirstName', '$LastName', '$phone_number')";
 
     echo "<br>";
 
@@ -19,3 +20,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn->close();
 }
 ?>
+

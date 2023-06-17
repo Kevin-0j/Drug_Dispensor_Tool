@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $manufacturerDate = $_POST['manufacturer_date'];
     $expiryDate = $_POST['expiry_date'];
 
-    $sql = "INSERT INTO drugs (TradeName, Text, Quantity, CompanyName, ManufacturerDate, ExpiryDate)
+    $sql = "INSERT INTO drugs (trade_name, text, quantity, company_name, manufacturer_date, expiry_date)
             VALUES ('$tradeName', '$text', '$quantity', '$companyName', '$manufacturerDate', '$expiryDate')";
 
     echo "<br>";
