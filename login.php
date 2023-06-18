@@ -1,56 +1,32 @@
 <?php
+require "connection.php";
+
 session_start();
 
-// Define the registered users
-$users = array(
-    array("username" => "admin", "password" => "admin123", "type" => "admin"),
-    array("username" => "pharmacist", "password" => "pharma123", "type" => "pharmacist"),
-    array("username" => "doctor", "password" => "doctor123", "type" => "doctor")
-);
+// Assuming you have already established a database connection
 
-// Check if the form is submitted
+ /// This is for the Doctor Page
+
+// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+  $username = $_POST['FName'];
+  $password = $_POST['LName'];
 
-    // Check if the username and password are valid
-    foreach ($users as $user) {
-        if ($user["username"] == $username && $user["password"] == $password) {
-            // Create a session and store the user's information
-            $_SESSION["username"] = $username;
-            $_SESSION["type"] = $user["type"];
+  // Check if the user exists in the doctors table
+  $query = "SELECT * FROM doctor WHERE FName = '$username' AND LName = '$password'";
+  $result = mysqli_query($conn, $query);
 
-            // Redirect the user to the appropriate page
-            if ($user["type"] == "admin") {
-                header("Location: admin.php");
-            } else if ($user["type"] == "pharmacist") {
-                header("Location: pharmacist.php");
-            } else if ($user["type"] == "doctor") {
-                header("Location: doctor.php");
-            }
-            exit();
-        }
-    }
+  if (mysqli_num_rows($result) == 1) {
+    $_SESSION['username'] = $username;
+    $_SESSION['role'] = 'doctor';
+    header("Location: doctor_page.php");
+    exit();
+  }
+   // Redirect to registration form if the user doesn't exist
+   header("Location: doctorform.html");
+   exit();
 
-    // If the username and password are invalid, show an error message
-    $error = "Invalid username or password.";
+
 }
-?>
 
-<!-- Create the login form -->
-<form method="post">
-    <label>Username:</label>
-    <input type="text" name="username"><br>
-
-    <label>Password:</label>
-    <input type="password" name="password"><br>
-
-    <button type="submit">Login</button>
-</form>
-
-<?php
-// Display the user's username if logged in
-if (isset($_SESSION["username"])) {
-    echo "Welcome, " . $_SESSION["username"] . "!";
-}
 ?>
