@@ -1,5 +1,6 @@
 <?php
 require "connection.php";
+
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -8,9 +9,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $deleteQuery = "DELETE FROM patient WHERE ssn = '$ssn'";
 
     if ($conn->query($deleteQuery) === TRUE) {
-        $_SESSION["successMessage"] = "Patient information deleted successfully";
+        $_SESSION["deleteMessage"] = "Patient information deleted successfully";
     } else {
-        $_SESSION["successMessage"] = "Error deleting patient information: " . $conn->error;
+        $_SESSION["deleteMessage"] = "Error deleting patient information: " . $conn->error;
     }
     $conn->close();
 }
