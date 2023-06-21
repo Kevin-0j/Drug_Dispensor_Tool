@@ -1,11 +1,9 @@
 
-
 <?php
-
 session_start();
 
 // Check if the user is logged in as a doctor
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'doctor') {
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'patient') {
   // Retrieve the logged-in username
   $username = $_SESSION['username'];
 } else {
@@ -18,14 +16,14 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'doctor') {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Doctor Page</title>
+  <title>Patient Page</title>
 </head>
 <body>
   <div style="text-align: right; padding: 10px;">
     Logged in as: <?php echo $username; ?>
   </div>
-  <h1>Welcome Dr. <?php echo $username; ?></h1>
-  <p>This is the doctor's page.</p>
+  <h1>Welcome Patient <?php echo $username; ?></h1>
+  <p>This is the patient page.</p>
   <!-- Rest of the doctor's page content -->
 </body>
 </html>

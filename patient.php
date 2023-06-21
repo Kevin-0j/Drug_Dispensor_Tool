@@ -4,12 +4,14 @@ require 'connection.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $firstName = $_POST['first_name'];
     $lastName = $_POST['last_name'];
+    $username =$_POST["username"];
+    $password =$_POST["password"];
     $ssn = $_POST['ssn'];
     $address = $_POST['address'];
     $medicalHistory = $_POST['medical_history'];
 
-    $sql = "INSERT INTO patient (first_name, last_Name, ssn, address, medical_history)
-            VALUES ('$firstName', '$lastName', '$ssn', '$address', '$medicalHistory')";
+    $sql = "INSERT INTO patient (first_name, last_name,username,password,ssn, address, medical_history)
+            VALUES ('$firstName', '$lastName', '$username','$password','$ssn', '$address', '$medicalHistory')";
 
     echo "<br>";
 
@@ -28,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Page</title>
+    <title>Patient Table</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         table {
@@ -59,6 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <tr class="bg-secondary text-danger">
                                 <td>First Name</td>
                                 <td>Last Name</td>
+                                <td>Username</td>
+                                <td>Password</td>
                                 <td>SSN</td>
                                 <td>Address</td>
                                 <td>Medical History</td>
@@ -73,6 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <tr>
                                     <td><?php echo $row['first_name']; ?></td>
                                     <td><?php echo $row['last_name']; ?></td>
+                                    <td><?php echo $row['username']; ?></td>
+                                    <td><?php echo $row['password']; ?></td>
                                     <td><?php echo $row['ssn']; ?></td>
                                     <td><?php echo $row['address']; ?></td>
                                     <td><?php echo $row['medical_history']; ?></td>

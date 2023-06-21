@@ -2,22 +2,26 @@
 require "connection.php";
 
 // Retrieve form data
-$company_name = $_POST['company_name'];
-$phone_number = $_POST['phone_number'];
-$pharmaceuticalcomp_id = $_POST['pharmaceuticalcomp_id'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-$sql = "INSERT INTO pharmaceutical(company_name, phone_number, pharmaceuticalcomp_id)
-VALUES ('$company_name', '$phone_number', '$pharmaceuticalcomp_id')";
+    $company_name = $_POST['company_name'];
+    $username =$_POST["username"];
+    $password =$_POST["password"];
+    $phone_number = $_POST['phone_number'];
+    $pharmaceuticalcomp_id = $_POST['pharmaceuticalcomp_id'];
 
-echo "<br>";
+    $sql = "INSERT INTO pharmaceutical(company_name, username,password,phone_number, pharmaceuticalcomp_id)
+            VALUES ('$company_name','$username','$password', '$phone_number', '$pharmaceuticalcomp_id')";
 
-if ($conn->query($sql) === TRUE) {
-    echo "Company registered successfully!";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Company registered successfully!";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    $conn->close();
 }
-$conn->close();
-
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +30,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pharamceutical Page</title>
+    <title>Pharamceutical Table</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         table {
@@ -55,6 +59,8 @@ $conn->close();
                     <div class="card-body">
                         <table class="table table-bordered text-center">
                             <tr class="bg-secondary text-danger">
+                                <td>Username</td>
+                                <td>Password</td>
                                 <td>Company Name</td>
                                 <td>Phone Number</td>
                                 <td>Pharmaceutical Company ID</td>
@@ -68,6 +74,8 @@ $conn->close();
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                 <tr>
+                                    <td><?php echo $row['username']; ?></td>
+                                    <td><?php echo $row['password']; ?></td>
                                     <td><?php echo $row['company_name']; ?></td>
                                     <td><?php echo $row['phone_number']; ?></td>
                                     <td><?php echo $row['pharmaceuticalcomp_id']; ?></td>

@@ -1,32 +1,84 @@
 <?php
 require "connection.php";
-
 session_start();
 
-// Assuming you have already established a database connection
+// Initialize error message
+$error = '';
 
- /// This is for the Doctor Page
+// Handle login
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $userType = $_POST['user_type'];
 
-// Handle form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $username = $_POST['FName'];
-  $password = $_POST['LName'];
+    // Determine the appropriate table based on the selected user type
+    $table = '';
 
-  // Check if the user exists in the doctors table
-  $query = "SELECT * FROM doctor WHERE FName = '$username' AND LName = '$password'";
-  $result = mysqli_query($conn, $query);
+    if ($userType == 'doctor') {
+        $table = 'doctor';
+    } elseif ($userType == 'patient') {
+        $table = 'patient';
+    } elseif ($userType == 'pharmaceutical') {
+        $table = 'pharmaceutical';
+    } elseif ($userType == 'supervisor') {
+        $table = 'supervisor';
+    }
 
-  if (mysqli_num_rows($result) == 1) {
-    $_SESSION['username'] = $username;
-    $_SESSION['role'] = 'doctor';
-    header("Location: doctor_page.php");
-    exit();
-  }
-   // Redirect to registration form if the user doesn't exist
-   header("Location: doctorform.html");
-   exit();
+    if ($table !== '') {
+        // Check if the user exists in the specified table
+        $query = "SELECT * FROM $table WHERE username = '$username' AND password = '$password'";
+        $result = mysqli_query($conn, $query);
 
+        if (mysqli_num_rows($result) == 1) {
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $userType;
 
+            // Redirect to the appropriate page based on user type
+            if ($userType == 'doctor') {
+                header("Location: doctor_page.php");
+                exit();
+            } elseif ($userType == 'patient') {
+                header("Location: patient_page.php");
+                exit();
+            } elseif ($userType == 'pharmaceutical') {
+                header("Location: pharmaceutical_page.php");
+                exit();
+            } elseif ($userType == 'supervisor') {
+                header("Location: supervisor_page.php");
+                exit();
+            }
+        } else {
+            $error = "Invalid username or password.";
+        }
+    }
 }
-
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
+  <h2>Login</h2>
+  
+  <form method="POST" action="login.php">
+    <input type="text" name="username" placeholder="Username" required><br><br>
+    <input type="password" name="password" placeholder="Password" required><br><br>
+    
+    <label for="user_type">Select user type:</label>
+    <select name="user_type" id="user_type">
+      <option value="doctor">Doctor</option>
+      <option value="patient">Patient</option>
+      <option value="pharmaceutical">Pharmaceutical</option>
+      <option value="supervisor">Supervisor</option>
+    </select><br><br>
+
+    <button type="submit" name="login">Login</button>
+    
+    <?php if ($error !== '') { ?>
+      <p style="color: red;"><?php echo $error; ?></p>
+    <?php } ?>
+  </form>
+</body>
+</html>
