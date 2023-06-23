@@ -6,16 +6,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user_type'])) {
 
     // Redirect to the appropriate signup form based on the selected user type
     if ($userType == 'doctor') {
-        header("Location: doctorform.html");
+        header("Location: Doctor/doctorform.html");
         exit();
     } elseif ($userType == 'patient') {
-        header("Location: patientform.html");
+        header("Location: pPatient/patientform.html");
         exit();
     } elseif ($userType == 'pharmaceutical') {
-        header("Location: pharmaceuticalregistrationform.html");
+        header("Location: Pharmaceutical/pharmaceuticalregistrationform.html");
         exit();
     } elseif ($userType == 'supervisor') {
-        header("Location: supervisorform.html");
+        header("Location: Supervisor/supervisorform.html");
         exit();
     }
 } else {

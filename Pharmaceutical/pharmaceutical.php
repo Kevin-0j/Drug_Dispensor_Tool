@@ -9,21 +9,22 @@ if (isset($_SESSION["successMessage"])) {
     unset($_SESSION["successMessage"]);
 }
 
+// Retrieve form data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $FName = $_POST["FName"];
-    $LName = $_POST["LName"];
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    $SSN = $_POST["SSN"];
-    $Speciality = $_POST["Speciality"];
-    $Experience = $_POST["Experience"];
-    $Email = $_POST["Email"];
 
-    $sql = "INSERT INTO doctor (FName, LName, username, password, SSN, Speciality, Experience, Email)
-            VALUES ('$FName', '$LName', '$username', '$password', '$SSN', '$Speciality', '$Experience', '$Email')";
+    $company_name = $_POST['company_name'];
+    $username =$_POST["username"];
+    $password =$_POST["password"];
+    $phone_number = $_POST['phone_number'];
+    $pharmaceuticalcomp_id = $_POST['pharmaceuticalcomp_id'];
+
+    $sql = "INSERT INTO pharmaceutical(company_name, username,password,phone_number, pharmaceuticalcomp_id)
+            VALUES ('$company_name','$username','$password', '$phone_number', '$pharmaceuticalcomp_id')";
+
+
 
     if ($conn->query($sql) === TRUE) {
-        echo "Doctor registered successfully";
+        echo "Company registered successfully!";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
@@ -37,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor's Table</title>
+    <title>Pharamceutical Table</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         table {
@@ -61,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col">
                 <div class="card mt-6">
                     <div class="card-header">
-                        <h2 class="display-6 text-center">Table of Registered Doctors</h2>
+                        <h2 class="display-6 text-center"> Table of  Pharmaceutical Companies</h2>
                     </div>
                     <div class="card-body">
                         <?php
@@ -71,40 +72,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
                         ?>
                         <table>
-                            <tr>
-                                <th>Doctor's SSN</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                            <tr> 
+                                <th>Company Name</th>
                                 <th>Username</th>
                                 <th>Password</th>
-                                <th>Speciality</th>
-                                <th>Years of Experience</th>
-                                <th></th>
-                                <th></th>
+                                <th>Phone Number</th>
+                                <th>Pharmaceutical Company ID</th>
+                                
+                                
                             </tr>
                             <?php
                             require("connection.php");
-                            $query = "SELECT * FROM doctor";
+                            $query = "SELECT * FROM pharmaceutical";
                             $result = mysqli_query($conn, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
-                            ?>
+                             ?>
                                 <tr>
-                                    <td><?php echo $row['SSN']; ?></td>
-                                    <td><?php echo $row['FName']; ?></td>
-                                    <td><?php echo $row['LName']; ?></td>
+                                    <td><?php echo $row['company_name']; ?></td>
                                     <td><?php echo $row['username']; ?></td>
                                     <td><?php echo $row['password']; ?></td>
-                                    <td><?php echo $row['Speciality']; ?></td>
-                                    <td><?php echo $row['Experience']; ?></td>
+                                    <td><?php echo $row['phone_number']; ?></td>
+                                    <td><?php echo $row['pharmaceuticalcomp_id']; ?></td>
+                                    
                                     <td>
-                                        <form action="update_doctor.php" method="POST">
-                                            <input type="hidden" name="SSN" value="<?php echo $row['SSN']; ?>">
+                                        <form action="update_pharmaceutical.php" method="POST">
+                                            <input type="hidden" name="pharmaceuticalcomp_id" value="<?php echo $row['pharmaceuticalcomp_id']; ?>">
                                             <button type="submit" class="btn btn-primary">Update</button>
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="delete_doctor.php" method="POST">
-                                            <input type="hidden" name="SSN" value="<?php echo $row['SSN']; ?>">
+                                        <form action="delete_pharmaceutical.php" method="POST">
+                                            <input type="hidden" name="pharmaceuticalcomp_id" value="<?php echo $row['pharmaceuticalcomp_id']; ?>">
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
                                     </td>
@@ -116,7 +114,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</body>
-</html>
+        </div>  

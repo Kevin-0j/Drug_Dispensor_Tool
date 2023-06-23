@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["FName"])) {
         session_start();
         $_SESSION["successMessage"] = "Doctor information updated successfully";
         // Redirect to the doctor.php file
-        header("Location: doctor.php");
+        header("Location:doctor.php");
         exit();
     } else {
         echo "Error updating doctor information: " . $conn->error;

@@ -35,16 +35,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 
             // Redirect to the appropriate page based on user type
             if ($userType == 'doctor') {
-                header("Location: doctor_page.php");
+                header("Location: Doctor/doctor_page.php");
                 exit();
             } elseif ($userType == 'patient') {
-                header("Location: patient_page.php");
+                header("Location: Patient/patient_page.php");
                 exit();
             } elseif ($userType == 'pharmaceutical') {
-                header("Location: pharmaceutical_page.php");
+                header("Location: Pharmaceutical/pharmaceutical_page.php");
                 exit();
             } elseif ($userType == 'supervisor') {
-                header("Location: supervisor_page.php");
+                header("Location: Supervisor/supervisor_page.php");
                 exit();
             }
         } else {
