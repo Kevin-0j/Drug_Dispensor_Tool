@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user_type'])) {
         header("Location: Doctor/doctorform.html");
         exit();
     } elseif ($userType == 'patient') {
-        header("Location: pPatient/patientform.html");
+        header("Location: Patient/patientform.html");
         exit();
     } elseif ($userType == 'pharmaceutical') {
         header("Location: Pharmaceutical/pharmaceuticalregistrationform.html");
