@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
   <title>Doctor Form</title>
   <style>
     body {
@@ -57,37 +58,89 @@
       margin-top: 10px;
     }
   </style>
+=======
+    <title>Doctor Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333333;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #666666;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="password"],
+        input[type="email"] {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #333333;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+>>>>>>> 507f81b13dcda8b3986dee9a57c3826b4f78df64
 </head>
 <body>
-  <h2>Doctor Registration</h2>
-  <form action="doctor.php" method="post">
-    <label for="ssn">SSN:</label>
-    <input type="text" id="SSN" name="SSN" required><br><br>
-    
-    <label for="name">FName:</label>
-    <input type="text" id="FName" name="FName" required><br><br>
-    
-    <label for="name">LName:</label>
-    <input type="text" id="LName" name="LName" required><br><br>
+    <h2>Doctor Registration</h2>
+    <form action="doctor.php" method="post">
+        <label for="ssn">SSN:</label>
+        <input type="text" id="SSN" name="SSN" required><br><br>
 
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br><br>
-    
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br><br>
+        <label for="name">First Name:</label>
+        <input type="text" id="FName" name="FName" required><br><br>
 
+        <label for="name">Last Name:</label>
+        <input type="text" id="LName" name="LName" required><br><br>
 
-    <label for="Speciality">Speciality:</label>
-    <input type="text" id="Speciality" name="Speciality" required><br><br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
 
-    
-    <label for="experience">Years of Experience:</label>
-    <input type="number" id="Experience" name="Experience" required><br><br>
-    
-    <label for="email">Email:</label>
-    <input type="email" id="Email" name="Email" required><br><br>
-    
-    <input type="submit" value="Register">
-  </form>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <label for="Speciality">Speciality:</label>
+        <input type="text" id="Speciality" name="Speciality" required><br><br>
+
+        <label for="experience">Years of Experience:</label>
+        <input type="number" id="Experience" name="Experience" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="Email" name="Email" required><br><br>
+
+        <input type="submit" value="Register">
+    </form>
 </body>
 </html>
