@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         Password: <input type='text' name='password' value='".$row['password']."'><br>
         Speciality: <input type='text' name='Speciality' value='".$row['Speciality']."'><br>
         Experience: <input type='text' name='Experience' value='".$row['Experience']."'><br>
+        Email: <input type='text' name='Email' value='".$row['Email']."'><br>
         <input type='submit' value='Update'>
     </form>";
 }
@@ -31,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["FName"])) {
     $password = $_POST["password"];
     $Speciality = $_POST["Speciality"];
     $Experience = $_POST["Experience"];
+    $Email = $_POST["Email"];
 
     $updateQuery = "UPDATE doctor SET FName = '$FName', LName = '$LName', username = '$username', password = '$password', Speciality = '$Speciality', Experience = '$Experience' WHERE SSN = '$SSN'";
 

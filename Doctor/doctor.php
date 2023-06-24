@@ -79,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <th>Password</th>
                                 <th>Speciality</th>
                                 <th>Years of Experience</th>
+                                <th>Email</th>
                                 
                             </tr>
                             <?php
@@ -95,6 +96,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <td><?php echo $row['password']; ?></td>
                                     <td><?php echo $row['Speciality']; ?></td>
                                     <td><?php echo $row['Experience']; ?></td>
+                                    <td><?php echo $row['Email']; ?></td>
+
                                     <td>
                                         <form action="update_doctor.php" method="POST">
                                             <input type="hidden" name="SSN" value="<?php echo $row['SSN']; ?>">
