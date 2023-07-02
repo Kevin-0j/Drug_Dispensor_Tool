@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "
         <form action='update_supervisor.php' method='POST'>
             <input type='hidden' name='supervisor_id' value='$supervisor_id'>
+            Supervisor ID:<input type='text' name='supervisor_id' value='".$row['supervisor_id']."'><br>
             First Name: <input type='text' name='First_name' value='".$row['First_name']."'><br>
             Last Name: <input type='text' name='Last_name' value='".$row['Last_name']."'><br>
             Username: <input type='text' name='username' value='".$row['username']."'><br>
@@ -38,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["First_name"]) && isset
     $password = $_POST["password"];
     $phone_number = $_POST["phone_number"];
 
-    $updateQuery = "UPDATE supervisor SET First_name = '$First_name', Last_name = '$Last_name', username = '$username', password = '$password', phone_number = '$phone_number' WHERE supervisor_id = '$supervisor_id'";
+    $updateQuery = "UPDATE supervisor SET First_name = '$First_name', Last_name = '$Last_name', username = '$username', password = '$password', phone_number = '$phone_number', supervisor_id = '$supervisor_id' WHERE supervisor_id = '$supervisor_id'";
 
     if ($conn->query($updateQuery) === TRUE) {
         // Set a session variable to store the success message
