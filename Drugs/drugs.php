@@ -3,14 +3,15 @@ require 'connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tradeName = $_POST['trade_name'];
+    $drugId = $_POST['drug_id'];
     $text = $_POST['text'];
     $quantity = $_POST['quantity'];
     $companyName = $_POST['company_name'];
     $manufacturerDate = $_POST['manufacturer_date'];
     $expiryDate = $_POST['expiry_date'];
 
-    $sql = "INSERT INTO drugs (trade_name, text, quantity, company_name, manufacturer_date, expiry_date)
-            VALUES ('$tradeName', '$text', '$quantity', '$companyName', '$manufacturerDate', '$expiryDate')";
+    $sql = "INSERT INTO drugs (trade_name, drug_id, text, quantity, company_name, manufacturer_date, expiry_date)
+            VALUES ('$tradeName', '$drugId', '$text', '$quantity', '$companyName', '$manufacturerDate', '$expiryDate')";
 
     echo "<br>";
 
@@ -54,16 +55,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col">
                 <div class="card mt-6">
                     <div class="card-header">
-                        <h2 class="display-6 text-center"> Table of  drugs</h2>
+                        <h2 class="display-6 text-center">Table of Drugs</h2>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered text-center">
                             <tr class="bg-secondary text-danger">
                                 <td>Trade Name</td>
+                                <td>Drug ID</td>
                                 <td>Text</td>
                                 <td>Quantity</td>
                                 <td>Company Name</td>
-                                <td>Manufacturer date</td>
+                                <td>Manufacturer Date</td>
                                 <td>Expiry Date</td>
                             </tr>
                             <?php
@@ -74,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 ?>
                                 <tr>
                                     <td><?php echo $row['trade_name']; ?></td>
+                                    <td><?php echo $row['drug_id']; ?></td>
                                     <td><?php echo $row['text']; ?></td>
                                     <td><?php echo $row['quantity']; ?></td>
                                     <td><?php echo $row['company_name']; ?></td>
@@ -91,4 +94,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </body>
 </html>
-

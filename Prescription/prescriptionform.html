@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Prescription Form</title>
+  <title>Pharmacist  Form</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -53,12 +53,15 @@
   </style>
 </head>
 <body>
-  <h1>Prescription Form</h1>
+  <h1>Pharmacist  Form</h1>
   <form action="prescription.php" method="POST">
     <label for="prescription_id">Prescription ID:</label>
     <input type="text" id="prescription_id" name="prescription_id" required><br><br>
 
-    <label for="description">Description:</label>
+    <label for="trade_name">Trade Name:</label>
+    <input type="text" id="trade_name" name="trade_name" required><br><br>
+
+    <label for="description">Prescription:</label>
     <textarea id="description" name="description" rows="4" cols="50" required></textarea><br><br>
 
     <label for="patient_ssn">Patient SSN:</label>
@@ -67,7 +70,7 @@
     <label for="doctor_ssn">Doctor SSN:</label>
     <input type="text" id="doctor_ssn" name="doctor_ssn" required><br><br>
 
-    <input type="submit" value="Submit Prescriptions">
+    <input type="submit" value="Dispense the drugs ">
   </form>
 </body>
 </html>

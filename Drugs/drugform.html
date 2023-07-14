@@ -56,13 +56,16 @@
           color: red;
           margin-top: 10px;
         }
-      </style>
+    </style>
 </head>
 <body>
     <h2>Drug Form</h2>
     <form action="drugs.php" method="POST">
         <label for="trade_name">Trade Name:</label>
         <input type="text" name="trade_name" required><br>
+
+        <label for="drug_id">Drug ID:</label>
+        <input type="text" name="drug_id" required><br>
 
         <label for="text">Text:</label>
         <textarea name="text" rows="4" required></textarea><br>
