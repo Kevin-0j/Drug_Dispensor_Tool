@@ -1,0 +1,35 @@
+body {
+    background-image: url('https://i.pinimg.com/564x/c8/b7/04/c8b70423418543e0d1a7bf4b31af3695.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Add a background color with opacity for better readability */
+}
+
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+p {
+    margin-top: 10px;
+}
+
+ul {
+    list-style-type: disc;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+li {
+    margin-top: 5px;
+}
