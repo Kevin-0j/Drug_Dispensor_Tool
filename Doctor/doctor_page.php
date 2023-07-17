@@ -11,6 +11,67 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'doctor') {
   exit();
 }
 
+// Include frequency of taking the drugs
+// Assuming you have a database connection, you can fetch the frequency information for the drugs
+$drugFrequencies = array(
+  'Aspirin' => 'Once daily',
+  'Ibuprofen' => 'Every 4-6 hours',
+  'Paracetamol' => 'Every 6 hours',
+  // Add more drugs and their frequencies as needed
+);
+
+// Search for a patient
+// Assuming you have a database connection, you can perform a search based on the patient's information
+function searchPatient($patientName) {
+  require("connection.php");
+
+  $query = "SELECT * FROM patient WHERE first_name LIKE ? OR last_name LIKE ?";
+  $stmt = mysqli_prepare($conn, $query);
+  $searchTerm = "%$patientName%";
+  mysqli_stmt_bind_param($stmt, "ss", $searchTerm, $searchTerm);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+
+  $patients = array();
+
+  while ($row = mysqli_fetch_assoc($result)) {
+    $patient = array(
+      'first_name' => $row['first_name'],
+      'last_name' => $row['last_name'],
+      'username' => $row['username'],
+      'password' => $row['password'],
+      'ssn' => $row['ssn'],
+      'address' => $row['address'],
+      'medical_history' => $row['medical_history']
+      // Add more patient details as needed
+    );
+
+    $patients[] = $patient;
+  }
+
+  return $patients;
+}
+
+// Prescribe a drug
+// Assuming you have a database connection, you can insert the prescribed drug information
+function prescribeDrug($patientID, $drugName, $dosage) {
+  require("connection.php");
+
+  // Assuming you have a "prescriptions" table with appropriate columns: patient_id, drug_name, dosage
+  $query = "INSERT INTO prescriptions (patient_ssn, trade_name, description) VALUES (?, ?, ?)";
+  $stmt = mysqli_prepare($conn, $query);
+  mysqli_stmt_bind_param($stmt, "iss", $patientID, $drugName, $dosage);
+  mysqli_stmt_execute($stmt);
+  
+  // Check if the prescription was successfully inserted
+  if (mysqli_stmt_affected_rows($stmt) > 0) {
+    return true; // Prescription successfully inserted
+  } else {
+    return false; // Prescription insertion failed
+  }
+}
+
+
 // Specify the directory where uploaded profile pictures will be stored
 $uploadDirectory = 'profile_pictures/';
 
@@ -123,6 +184,69 @@ $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaul
     <input type="submit" value="Upload">
   </form>
 
+  <!-- Include frequency of taking the drugs -->
+  <h2>Drug Frequencies:</h2>
+  <ul>
+    <?php foreach ($drugFrequencies as $drug => $frequency) { ?>
+      <li><?php echo $drug . ': ' . $frequency; ?></li>
+    <?php } ?>
+  </ul>
+
+  <!-- Search for a patient -->
+  <h2>Search for a Patient:</h2>
+  <form action="doctor_page.php" method="GET">
+    <input type="text" name="patient_name" placeholder="Enter patient name">
+    <input type="submit" value="Search">
+  </form>
+
+  <?php
+// Handle the search form submission
+if (isset($_GET['patient_name'])) {
+  $patientName = $_GET['patient_name'];
+  $patients = searchPatient($patientName);
+
+  if ($patients) {
+    // Display the patient's information
+    echo '<h2>Patient Information:</h2>';
+    foreach ($patients as $patient) {
+      echo '<p>Name: ' . $patient['first_name'] . ' ' . $patient['last_name'] . '</p>';
+      echo '<p>Username: ' . $patient['username'] . '</p>';
+      // echo '<p>Password: ' . $patient['password'] . '</p>';
+      echo '<p>SSN: ' . $patient['ssn'] . '</p>';
+      echo '<p>Address: ' . $patient['address'] . '</p>';
+      echo '<p>Medical History: ' . $patient['medical_history'] . '</p>';
+      // Display more patient details as needed
+      echo '<hr>';
+    }
+  } else {
+    // Patient not found
+    echo '<p>No patients found with the given name.</p>';
+  }
+}
+?>
+
+  <!-- Prescribe a drug -->
+  <h2>Prescribe a Drug:</h2>
+  <form action="prescription.php" method="POST">
+    <input type="text" name="patient_ssn" placeholder="Patient ID" required>
+    <input type="text" name="trade_name" placeholder="Drug Name" required>
+    <input type="text" name ="description" placeholder="Dosage" required>
+    <input type="submit" value="Prescribe">
+
+  </form>
+  <?php
+  // Handle the prescription form submission
+  if (isset($_POST['patient_ssn'], $_POST['trade_name'], $_POST['description'])) {
+    $patientID = $_POST['patient_ssn'];
+    $drugName = $_POST['trade_name'];
+    $dosage = $_POST['description'];
+
+    prescribeDrug($patientID, $drugName, $dosage);
+
+    // Display success message
+    echo '<p>Drug prescribed successfully!</p>';
+  }
+  ?>
   <!-- Rest of the doctor's page content -->
 </body>
 </html>
