@@ -23,6 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     } elseif ($userType == 'supervisor') {
         $table = 'supervisor';
     }
+    elseif ($userType == 'admin') {
+        $table = 'admin';
+    }
 
     if ($table !== '') {
         // Check if the user exists in the specified table
@@ -45,6 +48,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 exit();
             } elseif ($userType == 'supervisor') {
                 header("Location: Supervisor/supervisor_page.php");
+                exit();
+            }
+            
+            elseif ($userType == 'admin') {
+                header("Location: Admin/admin_page.php");
                 exit();
             }
         } else {
@@ -127,6 +135,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
       <option value="patient">Patient</option>
       <option value="pharmaceutical">Pharmaceutical</option>
       <option value="supervisor">Supervisor</option>
+      <option value="admin">Admin</option>
+
     </select><br><br>
 
     <button type="submit" name="login">Login</button>
