@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -11,6 +10,7 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'patient') {
   header("Location: login.html");
   exit();
 }
+
 // Specify the directory where uploaded profile pictures will be stored
 $uploadDirectory = 'profile_pictures/';
 
@@ -51,6 +51,23 @@ if (isset($_FILES['profile_picture'])) {
 // Check if the user has uploaded a profile picture or use the default profile picture
 $defaultPicturePath = 'default_profile_picture.jpg';
 $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaultPicturePath;
+
+// Handle appointment booking
+if (isset($_POST['appointment_date'])) {
+  $appointmentDate = $_POST['appointment_date'];
+  bookAppointment($username, $appointmentDate);
+
+  // Display success message
+  $successMessage = 'Appointment booked successfully!';
+}
+
+// Encouragement note on good health
+$encouragementNote = 'Stay healthy and take care of yourself. Your well-being matters!';
+
+function bookAppointment($username, $appointmentDate) {
+  // Add your code here to handle the booking of the appointment
+  // You can store the appointment information in a database or perform any other necessary operations
+}
 ?>
 
 <!DOCTYPE html>
@@ -99,6 +116,13 @@ $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaul
       cursor: pointer;
       font-size: 16px;
     }
+    .success-message {
+      color: green;
+    }
+    .encouragement-note {
+      font-style: italic;
+      color: #888;
+    }
   </style>
 </head>
 <body>
@@ -123,7 +147,19 @@ $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaul
     <input type="submit" value="Upload">
   </form>
 
+  <!-- Book Appointment -->
+  <h2>Book Appointment:</h2>
+  <?php if (isset($successMessage)) { ?>
+    <p class="success-message"><?php echo $successMessage; ?></p>
+  <?php } ?>
+  <form action="patient_page.php" method="POST">
+    <input type="date" name="appointment_date" required>
+    <input type="submit" value="Book">
+  </form>
+
+  <!-- Encouragement note -->
+  <p class="encouragement-note"><?php echo $encouragementNote; ?></p>
+
   <!-- Rest of the patient's page content -->
 </body>
 </html>
-
