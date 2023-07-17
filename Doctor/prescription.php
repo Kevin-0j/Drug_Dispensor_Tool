@@ -4,14 +4,14 @@ require "connection.php";
 // Retrieve form data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $prescription_id = $_POST['prescription_id'];
+   
     $trade_name = $_POST['trade_name'];
     $description = $_POST['description'];
     $patientssn = $_POST['patient_ssn'];    
     $doctorssn = $_POST['doctor_ssn'];
 
-    $sql = "INSERT INTO prescription(prescription_id, trade_name, description, patient_ssn, doctor_ssn)
-             VALUES ('$prescription_id', '$trade_name', '$description', '$patientssn', '$doctorssn')";
+    $sql = "INSERT INTO prescription(trade_name, description, patient_ssn, doctor_ssn)
+             VALUES ( '$trade_name', '$description', '$patientssn', '$doctorssn')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Prescription submitted successfully!";
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="card-body">
                         <table>
                             <tr>
-                                <th>Prescription ID</th>
+                               
                                 <th>Trade Name</th>
                                 <th>Description</th>
                                 <th>Patient SSN:</th>
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                 <tr>
-                                    <td><?php echo $row["prescription_id"]; ?></td>
+                                
                                     <td><?php echo $row["trade_name"]; ?></td>
                                     <td><?php echo $row['description']; ?></td>
                                     <td><?php echo $row["patient_ssn"]; ?></td>
