@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user_type'])) {
         header("Location: Admin/adminform.html");
         exit();
      }
-} else {
+ else {
     // Handle invalid request or missing user type
     echo "Invalid request";
 }
