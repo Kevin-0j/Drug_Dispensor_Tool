@@ -8,10 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $trade_name = $_POST['trade_name'];
     $description = $_POST['description'];
     $patientssn = $_POST['patient_ssn'];    
-    $doctorssn = $_POST['doctor_ssn'];
+   
 
-    $sql = "INSERT INTO prescription(trade_name, description, patient_ssn, doctor_ssn)
-             VALUES ( '$trade_name', '$description', '$patientssn', '$doctorssn')";
+    $sql = "INSERT INTO prescription(trade_name, description, patient_ssn)
+             VALUES ( '$trade_name', '$description', '$patientssn')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Prescription submitted successfully!";
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <th>Trade Name</th>
                                 <th>Description</th>
                                 <th>Patient SSN:</th>
-                                <th>Doctor SSN:</th>
+                               
                             </tr>
                             <?php
                             require("connection.php");
@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <td><?php echo $row["trade_name"]; ?></td>
                                     <td><?php echo $row['description']; ?></td>
                                     <td><?php echo $row["patient_ssn"]; ?></td>
-                                    <td><?php echo $row["doctor_ssn"]; ?></td>
+                                   
                                 </tr>
                                 <?php
                             }
