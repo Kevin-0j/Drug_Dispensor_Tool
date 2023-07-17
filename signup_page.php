@@ -18,10 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user_type'])) {
         header("Location: Supervisor/supervisorform.html");
         exit();
     }
-}     elseif ($userType == 'prescription') {
+     elseif ($userType == 'pharmacist') {
         header("Location: Prescription/prescriptionform.html");
         exit();
-}
+    }
     
      elseif ($userType == 'admin') {
         header("Location: Admin/adminform.html");
@@ -30,5 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user_type'])) {
  else {
     // Handle invalid request or missing user type
     echo "Invalid request";
+    }
 }
 ?>
