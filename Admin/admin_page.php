@@ -157,6 +157,18 @@ $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaul
         <div class="title">List of Patients</div>
         <a href="patient.php" class="link">View Patients</a>
 
+        <div class="title">Pharmaceutical Companies and Drugs</div>
+        <a href="pharmaceutical.php" class="link">View Companies and Drugs</a>
+
+        <div class="title">Drugs</div>
+        <a href="drugs.php" class="link">View Drugs</a>
+
+        <div class="title">Prescriptions</div>
+        <a href="prescription.php" class="link">View Prescriptions</a>
+
+        <div class="title">Supervisors</div>
+        <a href="supervisor.php" class="link">View Supervisors</a>
+
         <?php if (isset($message)) { ?>
             <p><?php echo $message; ?></p>
         <?php } ?>
