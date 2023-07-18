@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     </style>
 </head>
-<body class="bg-dark">
+<body>
     <div class="container">
 
         <h2>List of Admins</h2>

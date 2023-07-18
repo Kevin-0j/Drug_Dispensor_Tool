@@ -59,10 +59,12 @@ $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaul
 <head>
     <title>Admin Page</title>
     <style>
-        body {
+         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-image: url("https://i.pinimg.com/564x/c5/c2/f3/c5c2f39e7f1122cf9dcd3fc1500de2a6.jpg");
+            background-size: cover;
         }
 
         .container {
