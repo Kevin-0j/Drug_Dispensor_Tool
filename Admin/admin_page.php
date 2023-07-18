@@ -175,3 +175,4 @@ $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaul
     </div>
 </body>
 </html>
+
