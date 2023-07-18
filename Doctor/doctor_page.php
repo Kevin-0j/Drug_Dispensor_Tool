@@ -54,13 +54,13 @@ function searchPatient($patientName) {
 
 // Prescribe a drug
 // Assuming you have a database connection, you can insert the prescribed drug information
-function prescribeDrug($patientID, $drugName, $dosage) {
+function prescribeDrug($patientID, $drugName, $dosage, $quantity, $price) {
   require("connection.php");
 
-  // Assuming you have a "prescriptions" table with appropriate columns: patient_id, drug_name, dosage
-  $query = "INSERT INTO prescriptions (patient_ssn, trade_name, description) VALUES (?, ?, ?)";
+  // Assuming you have a "drugs" table with appropriate columns: patient_ssn, trade_name, description, quantity, price
+  $query = "INSERT INTO drugs (patient_ssn, trade_name, description, quantity, price) VALUES (?, ?, ?, ?, ?)";
   $stmt = mysqli_prepare($conn, $query);
-  mysqli_stmt_bind_param($stmt, "iss", $patientID, $drugName, $dosage);
+  mysqli_stmt_bind_param($stmt, "isssd", $patientID, $drugName, $dosage, $quantity, $price);
   mysqli_stmt_execute($stmt);
   
   // Check if the prescription was successfully inserted
@@ -227,21 +227,24 @@ if (isset($_GET['patient_name'])) {
 
   <!-- Prescribe a drug -->
   <h2>Prescribe a Drug:</h2>
-  <form action="prescription.php" method="POST">
-    <input type="text" name="patient_ssn" placeholder="Patient ID" required>
+  <form action="drugs.php" method="POST">
+    <input type="text" name="patient_ssn" placeholder="Patient SSN" required>
     <input type="text" name="trade_name" placeholder="Drug Name" required>
-    <input type="text" name ="description" placeholder="Dosage" required>
+    <input type="text" name="description" placeholder="Dosage" required>
+    <input type="text" name="quantity" placeholder="Quantity" required>
+    <input type="text" name="price" placeholder="Price" required>
     <input type="submit" value="Prescribe">
-
   </form>
   <?php
   // Handle the prescription form submission
-  if (isset($_POST['patient_ssn'], $_POST['trade_name'], $_POST['description'])) {
+  if (isset($_POST['patient_ssn'], $_POST['trade_name'], $_POST['description'], $_POST['quantity'], $_POST['price'])) {
     $patientID = $_POST['patient_ssn'];
     $drugName = $_POST['trade_name'];
     $dosage = $_POST['description'];
+    $quantity = $_POST['quantity'];
+    $price = $_POST['price'];
 
-    prescribeDrug($patientID, $drugName, $dosage);
+    prescribeDrug($patientID, $drugName, $dosage, $quantity, $price);
 
     // Display success message
     echo '<p>Drug prescribed successfully!</p>';

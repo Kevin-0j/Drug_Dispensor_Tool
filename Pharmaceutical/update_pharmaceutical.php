@@ -13,9 +13,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form action='update_pharmaceutical.php' method='POST'>
         <input type='hidden' name='pharmaceuticalcomp_id' value='$pharmaceuticalcomp_id'>
         Company Name: <input type='text' name='company_name' value='".$row['company_name']."'><br>
+        Pharmaceutical Company ID: <input type='text' name='pharmaceuticalcomp_id' value='".$row['pharmaceuticalcomp_id']."'><br>
         Username: <input type='text' name='username' value='".$row['username']."'><br>
         Password: <input type='text' name='password' value='".$row['password']."'><br>
-        Phone Number: <input type='text' name='phone_number' value='".$row['phone_number']."'><br>
+        Trade Name: <input type='text' name='trade_name' value='".$row['trade_name']."'><br>
+        Drug ID: <input type='text' name='drug_id' value='".$row['drug_id']."'><br>
+        Quantity: <input type='text' name='quantity' value='".$row['quantity']."'><br>
+        Manufacturer Date: <input type='text' name='manufacturer_date' value='".$row['manufacturer_date']."'><br>
+        Expiry Date: <input type='text' name='expiry_date' value='".$row['expiry_date']."'><br>
+
+
+        
         <input type='submit' value='Update'>
     </form>";
 }
@@ -23,12 +31,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Handle the form submission to update the user's information
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["company_name"])) {
     $company_name = $_POST["company_name"];
+    $pharmaceuticalcomp_id = $_POST["pharmaceuticalcomp_id"];
     $username = $_POST["username"];
     $password = $_POST["password"];
-    $phone_number= $_POST["phone_number"];
-    $pharmaceuticalcomp_id = $_POST["pharmaceuticalcomp_id"];
+    $tradename = $_POST["trade_name"];
+    $drug_id = $_POST["drug_id"];
+    $quantity = $_POST["quantity"];
+    $manufacturer_date = $_POST["manufacturer_date"];
+    $expiry_date = $_POST["expiry_date"];
 
-    $updateQuery = "UPDATE pharmaceutical SET company_name = '$company_name',  username = '$username', password = '$password', phone_number = '$phone_number' WHERE pharmaceuticalcomp_id = '$pharmaceuticalcomp_id'";
+    
+
+    $updateQuery = "UPDATE pharmaceutical SET company_name = '$company_name', trade_name= '$tradename',drug_id='$drug_id',quantity='$quantity',manufacture_date='$manufacture_date',expiry_date='$expiry_date', username = '$username', password = '$password' WHERE pharmaceuticalcomp_id = '$pharmaceuticalcomp_id'";
 
     if ($conn->query($updateQuery) === TRUE) {
         // Set a session variable to store the success message

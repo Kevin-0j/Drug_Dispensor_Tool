@@ -53,10 +53,13 @@
   </style>
 </head>
 <body>
-  <h2>Pharmaceutical Company Registration</h2>
+  <h2> Company and Drug Registration</h2>
   <form action="pharmaceutical.php" method="post">
     <label for="company_name">Company Name:</label> 
     <input type="text" id="company_name" name="company_name" required><br><br>
+
+    <label for="pharmaceuticalcomp_id">Pharmaceutical Company ID:</label>
+    <input type="text" id="pharmaceuticalcomp_id" name="pharmaceuticalcomp_id" required><br><br>
 
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required><br><br>
@@ -64,11 +67,25 @@
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required><br><br>
 
-    <label for="phone_number">Phone Number:</label>
-    <input type="text" id="phone_number" name="phone_number" required><br><br>
+    <label for="trade_name">Trade Name:</label>
+    <input type="text" id="trade_name" name="trade_name" required><br><br>
 
-    <label for="pharmaceuticalcomp_id">Pharmaceutical Company ID:</label>
-    <input type="text" id="pharmaceuticalcomp_id" name="pharmaceuticalcomp_id" required><br><br>
+    <label for="drug_id">Drug ID:</label>
+    <input type="text" id="drug_id" name="drug_id" required><br><br>
+
+    <label for="quantity">Quantity:</label>
+    <input type="text" id="quantity" name="quantity" required><br><br>
+
+    <label for="manufacture_date">Manufacture Date:</label>
+    <input type="date" id="manufacture_date" name="manufacture_date" required><br><br>
+
+    <label for="expiry_date">Expiry Date:</label>
+    <input type="date" id="expiry_date" name="expiry_date" required><br><br>
+    
+
+    
+
+    
 
     <input type="submit" value="Register">
   </form>

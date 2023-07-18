@@ -1,27 +1,3 @@
-<?php
-require "connection.php";
-
-// Retrieve form data
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-   
-    $trade_name = $_POST['trade_name'];
-    $description = $_POST['description'];
-    $patientssn = $_POST['patient_ssn'];    
-   
-
-    $sql = "INSERT INTO prescription(trade_name, description, patient_ssn)
-             VALUES ( '$trade_name', '$description', '$patientssn')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Prescription submitted successfully!";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-    $conn->close();
-}  
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,16 +28,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col">
                 <div class="card mt-6">
                     <div class="card-header">
-                        <h2 class="display-6 text-center"> Table of  Prescriptions</h2>
+                        <h2 class="display-6 text-center">Table of Prescriptions</h2>
                     </div>
                     <div class="card-body">
-                        <table>
+                        <?php
+                        if (isset($_SESSION["deleteMessage"])) {
+                            echo "<div class='alert alert-success'>" . $_SESSION["deleteMessage"] . "</div>";
+                            unset($_SESSION["deleteMessage"]);
+                        }
+                        ?>
+                        
+                        <table class="table table-bordered text-center">
                             <tr>
-                               
+                                <th>Username</th>
+                                <th>Password</th>
                                 <th>Trade Name</th>
                                 <th>Description</th>
-                                <th>Patient SSN:</th>
-                               
+                                <th>Patient SSN</th>
+                                <th>Actions</th>
                             </tr>
                             <?php
                             require("connection.php");
@@ -70,11 +54,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                 <tr>
-                                
+                                    <td><?php echo $row["username"]; ?></td>
+                                    <td><?php echo $row["password"]; ?></td>
                                     <td><?php echo $row["trade_name"]; ?></td>
                                     <td><?php echo $row['description']; ?></td>
                                     <td><?php echo $row["patient_ssn"]; ?></td>
-                                   
+                                    
+                                    <td>
+                                        <form action="update_prescription.php" method="POST">
+                                            <input type="hidden" name="trade_name" value="<?php echo $row["trade_name"]; ?>">
+                                            <button type="submit" class="btn btn-sm btn-danger">Update</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="delete_prescription.php" method="POST">
+                                            <input type="hidden" name="trade_name" value="<?php echo $row["trade_name"]; ?>">
+                                            <button type="submit" class="btn btn-sm btn-warning">Delete</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="pharmaceutical.php" method="POST">
+                                            <input type="hidden" name="trade_name" value="<?php echo $row["trade_name"]; ?>">
+                                            <button type="submit" class="btn btn-sm btn-primary">Dispense</button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 <?php
                             }

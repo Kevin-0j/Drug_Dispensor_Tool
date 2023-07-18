@@ -55,6 +55,11 @@
 <body>
   <h1>Pharmacist  Form</h1>
   <form action="prescription.php" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
     
     <label for="trade_name">Trade Name:</label>
     <input type="text" id="trade_name" name="trade_name" required><br><br>
@@ -66,7 +71,7 @@
     <input type="text" id="patient_ssn" name="patient_ssn" required><br><br>
 
    
-    <input type="submit" value="Dispense the drugs ">
+    <input type="submit" value="Sign Up ">
   </form>
 </body>
 </html>

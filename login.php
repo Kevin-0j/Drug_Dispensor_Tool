@@ -23,6 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     } elseif ($userType == 'supervisor') {
         $table = 'supervisor';
     }
+      elseif ($userType == 'pharmacist') {
+          $table = 'prescription';
+      }
     elseif ($userType == 'admin') {
         $table = 'admin';
     }
@@ -50,11 +53,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 header("Location: Supervisor/supervisor_page.php");
                 exit();
             }
-            
+              elseif ($userType == 'pharmacist') {
+                header("Location: Prescription/prescription.php");
+                exit();
+            }
             elseif ($userType == 'admin') {
                 header("Location: Admin/admin_page.php");
                 exit();
             }
+
+     
         } else {
             $error = "Invalid username or password.";
         }
@@ -135,6 +143,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
       <option value="patient">Patient</option>
       <option value="pharmaceutical">Pharmaceutical</option>
       <option value="supervisor">Supervisor</option>
+      <option value="pharmacist">Pharmacist</option>
+
       <option value="admin">Admin</option>
 
     </select><br><br>
@@ -147,3 +157,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
   </form>
 </body>
 </html>
+
+
+

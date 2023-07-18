@@ -11,12 +11,14 @@ if (isset($_SESSION["successMessage"])) {
 
 // Retrieve form data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
     $trade_name = $_POST['trade_name'];
     $description = $_POST['description'];
     $patient_ssn = $_POST['patient_ssn'];
 
-    $sql = "INSERT INTO prescription (trade_name, description, patient_ssn)
-            VALUES ('$trade_name', '$description', '$patient_ssn')";
+    $sql = "INSERT INTO prescription (username,password,trade_name, description, patient_ssn)
+            VALUES ('$username','$password','$trade_name', '$description', '$patient_ssn')";
 
     if ($conn->query($sql) === TRUE) {
         $_SESSION["successMessage"] = "Prescription submitted successfully!";
@@ -71,6 +73,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                         <table class="table table-bordered text-center">
                             <tr>
+                                <th>Username</th>
+                                <th>Password</th>
                                 <th>Trade Name</th>
                                 <th>Description</th>
                                 <th>Patient SSN</th>
@@ -83,6 +87,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                 <tr>
+                                    <td><?php echo $row["username"]; ?></td>
+                                    <td><?php echo $row["password"]; ?></td>
                                     <td><?php echo $row["trade_name"]; ?></td>
                                     <td><?php echo $row['description']; ?></td>
                                     <td><?php echo $row["patient_ssn"]; ?></td>

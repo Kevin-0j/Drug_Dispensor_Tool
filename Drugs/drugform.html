@@ -61,27 +61,26 @@
 <body>
     <h2>Drug Form</h2>
     <form action="drugs.php" method="POST">
+
+        <label for="patient_ssn">Patient SSN:</label>
+        <input type="text" name="patient_ssn" required><br>
+
         <label for="trade_name">Trade Name:</label>
         <input type="text" name="trade_name" required><br>
 
-        <label for="drug_id">Drug ID:</label>
-        <input type="text" name="drug_id" required><br>
+        <label for="description">Description:</label>
+        <input type="text" name="description" required><br>
 
-        <label for="text">Text:</label>
-        <textarea name="text" rows="4" required></textarea><br>
+
+  
 
         <label for="quantity">Quantity:</label>
-        <input type="number" name="quantity" required><br>
+        <input type="text" name="quantity" required><br>
 
-        <label for="company_name">Company Name:</label>
-        <input type="text" name="company_name" required><br>
+        <label for="price">price:</label>
+        <input type="number" name="price" required><br>
 
-        <label for="manufacturer_date">Manufacturer Date:</label>
-        <input type="date" name="manufacturer_date" required><br>
-
-        <label for="expiry_date">Expiry Date:</label>
-        <input type="date" name="expiry_date" required><br>
-
+      
         <input type="submit" value="Submit">
     </form>
 </body>
