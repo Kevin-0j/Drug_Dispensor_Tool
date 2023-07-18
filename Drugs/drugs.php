@@ -1,9 +1,17 @@
 <?php
 require 'connection.php';
 
+// Check if the success message is set
+session_start();
+if (isset($_SESSION["successMessage"])) {
+    echo "<div class='alert alert-success'>" . $_SESSION["successMessage"] . "</div>";
+    // Unset the session variable to clear the message
+    unset($_SESSION["successMessage"]);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tradeName = $_POST['trade_name'];
-    $drugId = $_POST['drug_id'];
+    $drug_Id = $_POST['drug_id'];
     $text = $_POST['text'];
     $quantity = $_POST['quantity'];
     $companyName = $_POST['company_name'];
@@ -11,19 +19,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $expiryDate = $_POST['expiry_date'];
 
     $sql = "INSERT INTO drugs (trade_name, drug_id, text, quantity, company_name, manufacturer_date, expiry_date)
-            VALUES ('$tradeName', '$drugId', '$text', '$quantity', '$companyName', '$manufacturerDate', '$expiryDate')";
-
-    echo "<br>";
+            VALUES ('$tradeName', '$drug_Id', '$text', '$quantity', '$companyName', '$manufacturerDate', '$expiryDate')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Drug data inserted successfully";
+        $_SESSION["successMessage"] = "Drug data inserted successfully";
+        header("Location: drugs.php");
+        exit();
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
     $conn->close();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,6 +65,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <h2 class="display-6 text-center">Table of Drugs</h2>
                     </div>
                     <div class="card-body">
+                        <?php
+                        if (isset($_SESSION["deleteMessage"])) {
+                            ?>
+                            <div class="alert alert-danger text-center">
+                                <?php echo $_SESSION["deleteMessage"]; ?>
+                            </div>
+                            <?php
+                            unset($_SESSION["deleteMessage"]);
+                        }
+                        ?>
+                        
+
                         <table class="table table-bordered text-center">
                             <tr class="bg-secondary text-danger">
                                 <td>Trade Name</td>
@@ -67,6 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <td>Company Name</td>
                                 <td>Manufacturer Date</td>
                                 <td>Expiry Date</td>
+                                <td>Actions</td>
                             </tr>
                             <?php
                             require("connection.php");
@@ -82,6 +102,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <td><?php echo $row['company_name']; ?></td>
                                     <td><?php echo $row['manufacturer_date']; ?></td>
                                     <td><?php echo $row['expiry_date']; ?></td>
+
+                                    <td>
+                                        <form action="update_drugs.php" method="POST">
+                                            <input type="hidden" name="drug_id" value="<?php echo $row['drug_id']; ?>">
+                                            <button type="submit" class="btn btn-sm btn-warning">Update</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="delete_drugs.php" method="POST">
+                                            <input type="hidden" name="drug_id" value="<?php echo $row['drug_id']; ?>">
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 <?php
                             }

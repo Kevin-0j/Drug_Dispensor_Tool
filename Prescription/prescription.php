@@ -1,25 +1,32 @@
 <?php
 require "connection.php";
 
+// Check if the success message is set
+session_start();
+if (isset($_SESSION["successMessage"])) {
+    echo "<div class='alert alert-success'>" . $_SESSION["successMessage"] . "</div>";
+    // Unset the session variable to clear the message
+    unset($_SESSION["successMessage"]);
+}
+
 // Retrieve form data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-   
     $trade_name = $_POST['trade_name'];
     $description = $_POST['description'];
-    $patientssn = $_POST['patient_ssn'];    
-   
+    $patient_ssn = $_POST['patient_ssn'];
 
-    $sql = "INSERT INTO prescription( trade_name, description, patient_ssn )
-             VALUES ('$trade_name', '$description', '$patientssn')";
+    $sql = "INSERT INTO prescription (trade_name, description, patient_ssn)
+            VALUES ('$trade_name', '$description', '$patient_ssn')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Prescription submitted successfully!";
+        $_SESSION["successMessage"] = "Prescription submitted successfully!";
+        header("Location: prescription.php");
+        exit();
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
     $conn->close();
-}  
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,16 +59,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col">
                 <div class="card mt-6">
                     <div class="card-header">
-                        <h2 class="display-6 text-center"> Table of  Prescriptions</h2>
+                        <h2 class="display-6 text-center">Table of Prescriptions</h2>
                     </div>
                     <div class="card-body">
-                        <table>
+                        <?php
+                        if (isset($_SESSION["deleteMessage"])) {
+                            echo "<div class='alert alert-success'>" . $_SESSION["deleteMessage"] . "</div>";
+                            unset($_SESSION["deleteMessage"]);
+                        }
+                        ?>
+                        
+                        <table class="table table-bordered text-center">
                             <tr>
-                                
                                 <th>Trade Name</th>
                                 <th>Description</th>
-                                <th>Patient SSN:</th>
-                                
+                                <th>Patient SSN</th>
+                                <th>Actions</th>
                             </tr>
                             <?php
                             require("connection.php");
@@ -70,11 +83,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                 <tr>
-                                   
                                     <td><?php echo $row["trade_name"]; ?></td>
                                     <td><?php echo $row['description']; ?></td>
                                     <td><?php echo $row["patient_ssn"]; ?></td>
-                                    
+                                    <td>
+                                        <form action="update_prescription.php" method="POST">
+                                            <input type="hidden" name="trade_name" value="<?php echo $row["trade_name"]; ?>">
+                                            <button type="submit" class="btn btn-sm btn-danger">Update</button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form action="delete_prescription.php" method="POST">
+                                            <input type="hidden" name="trade_name" value="<?php echo $row["trade_name"]; ?>">
+                                            <button type="submit" class="btn btn-sm btn-warning">Delete</button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 <?php
                             }
