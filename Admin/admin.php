@@ -2,14 +2,12 @@
 require 'connection.php';
 session_start();
 
-// Check if the user is logged in as an admin
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-    // Retrieve the logged-in username
-    $username = $_SESSION['username'];
-} else {
-    // Redirect to the login page if the user is not logged in as an admin
-    header("Location: login.html");
-    exit();
+// Check if the success message is set
+
+if (isset($_SESSION["successMessage"])) {
+    echo "<div class='alert alert-success'>" . $_SESSION["successMessage"] . "</div>";
+    // Unset the session variable to clear the message
+    unset($_SESSION["successMessage"]);
 }
 
 // Insert new admin if the form is submitted
