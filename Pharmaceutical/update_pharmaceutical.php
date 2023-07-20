@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         Trade Name: <input type='text' name='trade_name' value='".$row['trade_name']."'><br>
         Drug ID: <input type='text' name='drug_id' value='".$row['drug_id']."'><br>
         Quantity: <input type='text' name='quantity' value='".$row['quantity']."'><br>
-        Manufacturer Date: <input type='text' name='manufacturer_date' value='".$row['manufacturer_date']."'><br>
+        Manufacture Date: <input type='text' name='manufacture_date' value='".$row['manufacture_date']."'><br>
         Expiry Date: <input type='text' name='expiry_date' value='".$row['expiry_date']."'><br>
 
 
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["company_name"])) {
     $tradename = $_POST["trade_name"];
     $drug_id = $_POST["drug_id"];
     $quantity = $_POST["quantity"];
-    $manufacturer_date = $_POST["manufacturer_date"];
+    $manufacture_date = $_POST["manufacture_date"];
     $expiry_date = $_POST["expiry_date"];
 
     

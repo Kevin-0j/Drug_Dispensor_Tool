@@ -150,7 +150,7 @@ $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaul
 </head>
 <body>
     <div class="container">
-        <h1>Welcome Admin <?php echo $username; ?></h1>
+        <h1>Welcome  <?php echo $username; ?></h1>
         <div class="title">List of Doctors</div>
         <a href="doctor.php" class="link">View Doctors</a>
 
@@ -163,8 +163,8 @@ $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaul
         <div class="title">Drugs</div>
         <a href="drugs.php" class="link">View Drugs</a>
 
-        <div class="title">Prescriptions</div>
-        <a href="prescription.php" class="link">View Prescriptions</a>
+        <div class="title">Pharmacists</div>
+        <a href="prescription.php" class="link">View Pharmacists</a>
 
         <div class="title">Supervisors</div>
         <a href="supervisor.php" class="link">View Supervisors</a>

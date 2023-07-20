@@ -3,14 +3,14 @@ require "connection.php";
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $trade_name = $_POST["trade_name"];
+    $username = $_POST["username"];
 
-    $deleteQuery = "DELETE FROM prescription WHERE trade_name = '$trade_name'";
+    $deleteQuery = "DELETE FROM prescription WHERE username = '$username'";
 
     if ($conn->query($deleteQuery) === TRUE) {
-        $_SESSION["deleteMessage"] = "Prescription information deleted successfully";
+        $_SESSION["deleteMessage"] = "Pharmacist information deleted successfully";
     } else {
-        $_SESSION["deleteMessage"] = "Error deleting prescription information: " . $conn->error;
+        $_SESSION["deleteMessage"] = "Error deleting pharmacist information: " . $conn->error;
     }
     $conn->close();
 }
@@ -18,4 +18,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 header("Location: prescription.php");
 exit();
 ?>
+
 

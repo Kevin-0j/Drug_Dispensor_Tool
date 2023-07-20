@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col">
                 <div class="card mt-6">
                     <div class="card-header">
-                        <h2 class="display-6 text-center">Table of Drugs</h2>
+                        <h2 class="display-6 text-center">Table of Prescriptions</h2>
                     </div>
                     <div class="card-body">
                         <?php

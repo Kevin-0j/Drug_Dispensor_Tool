@@ -11,6 +11,8 @@ if (isset($_SESSION['role']) && $_SESSION['role'] === 'doctor') {
   exit();
 }
 
+
+
 // Include frequency of taking the drugs
 // Assuming you have a database connection, you can fetch the frequency information for the drugs
 $drugFrequencies = array(
@@ -119,6 +121,21 @@ $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaul
 <head>
   <title>Doctor Page</title>
   <style>
+     body {
+      /* Add the background image link here */
+      background-image: url('https://i.pinimg.com/564x/e0/15/43/e01543b46d4c7f46c3d2baa39e947cee.jpg');
+      /* Set background image size and other properties as needed */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin: 0; /* Remove default margin from body */
+      padding: 0; /* Remove default padding from body */
+      min-height: 100vh; /* Set minimum height to cover the entire viewport */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
     .user-info {
       display: flex;
       justify-content: flex-end; /* Align user info to the right */
@@ -235,21 +252,6 @@ if (isset($_GET['patient_name'])) {
     <input type="text" name="price" placeholder="Price" required>
     <input type="submit" value="Prescribe">
   </form>
-  <?php
-  // Handle the prescription form submission
-  if (isset($_POST['patient_ssn'], $_POST['trade_name'], $_POST['description'], $_POST['quantity'], $_POST['price'])) {
-    $patientID = $_POST['patient_ssn'];
-    $drugName = $_POST['trade_name'];
-    $dosage = $_POST['description'];
-    $quantity = $_POST['quantity'];
-    $price = $_POST['price'];
-
-    prescribeDrug($patientID, $drugName, $dosage, $quantity, $price);
-
-    // Display success message
-    echo '<p>Drug prescribed successfully!</p>';
-  }
-  ?>
-  <!-- Rest of the doctor's page content -->
+  
 </body>
 </html>

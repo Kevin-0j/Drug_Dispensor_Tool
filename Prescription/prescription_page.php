@@ -1,16 +1,16 @@
 <?php
+
 session_start();
 
-// Check if the user is logged in as a patient
-if (isset($_SESSION['role']) && $_SESSION['role'] === 'patient') {
+// Check if the user is logged in as a supervisor
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'pharmacist') {
   // Retrieve the logged-in username
   $username = $_SESSION['username'];
 } else {
-  // Redirect to the login page if the user is not logged in as a patient
+  // Redirect to the login page if the user is not logged in as a supervisor
   header("Location: login.html");
   exit();
 }
-
 // Specify the directory where uploaded profile pictures will be stored
 $uploadDirectory = 'profile_pictures/';
 
@@ -51,45 +51,13 @@ if (isset($_FILES['profile_picture'])) {
 // Check if the user has uploaded a profile picture or use the default profile picture
 $defaultPicturePath = 'default_profile_picture.jpg';
 $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaultPicturePath;
-
-// Handle appointment booking
-if (isset($_POST['appointment_date'])) {
-  $appointmentDate = $_POST['appointment_date'];
-  bookAppointment($username, $appointmentDate);
-
-  // Display success message
-  $successMessage = 'Appointment booked successfully!';
-}
-
-// Encouragement note on good health
-$encouragementNote = 'Stay healthy and take care of yourself. Your well-being matters!';
-
-function bookAppointment($username, $appointmentDate) {
-  // Add your code here to handle the booking of the appointment
-  // You can store the appointment information in a database or perform any other necessary operations
-}
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Patient Page</title>
+  <title>Pharmacist Page</title>
   <style>
-     body {
-      /* Add the background image link here */
-      background-image: url('https://i.pinimg.com/564x/0f/bb/80/0fbb80d55d38c753a3165d71c7303d48.jpg');
-      /* Set background image size and other properties as needed */
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      margin: 0; /* Remove default margin from body */
-      padding: 0; /* Remove default padding from body */
-      min-height: 100vh; /* Set minimum height to cover the entire viewport */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
     .user-info {
       display: flex;
       justify-content: flex-end; /* Align user info to the right */
@@ -131,13 +99,6 @@ function bookAppointment($username, $appointmentDate) {
       cursor: pointer;
       font-size: 16px;
     }
-    .success-message {
-      color: green;
-    }
-    .encouragement-note {
-      font-style: italic;
-      color: #888;
-    }
   </style>
 </head>
 <body>
@@ -151,30 +112,19 @@ function bookAppointment($username, $appointmentDate) {
     </div>
   </div>
 
-  <h1 style="margin-top: 0;">Welcome Patient <?php echo $username; ?></h1>
+  <h1 style="margin-top: 0;">Welcome Pharmacist <?php echo $username; ?></h1>
 
   <?php if (isset($message)) { ?>
     <p><?php echo $message; ?></p>
   <?php } ?>
 
-  <form action="patient_page.php" method="POST" enctype="multipart/form-data" style="display: none;">
+  <form action="prescription_page.php" method="POST" enctype="multipart/form-data" style="display: none;">
     <input type="file" name="profile_picture" id="profile_picture" accept="image/*" onchange="this.form.submit();">
     <input type="submit" value="Upload">
   </form>
 
-  <!-- Book Appointment -->
-  <h2>Book Appointment:</h2>
-  <?php if (isset($successMessage)) { ?>
-    <p class="success-message"><?php echo $successMessage; ?></p>
-  <?php } ?>
-  <form action="patient_page.php" method="POST">
-    <input type="date" name="appointment_date" required>
-    <input type="submit" value="Book">
-  </form>
-
-  <!-- Encouragement note -->
-  <p class="encouragement-note"><?php echo $encouragementNote; ?></p>
-
-  <!-- Rest of the patient's page content -->
+ 
 </body>
 </html>
+
+

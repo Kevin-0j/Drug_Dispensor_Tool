@@ -11,14 +11,13 @@ if (isset($_SESSION["successMessage"])) {
 
 // Retrieve form data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $firstName = $_POST["FirstName"];
+    $lastName = $_POST["LastName"];
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $trade_name = $_POST['trade_name'];
-    $description = $_POST['description'];
-    $patient_ssn = $_POST['patient_ssn'];
 
-    $sql = "INSERT INTO prescription (username,password,trade_name, description, patient_ssn)
-            VALUES ('$username','$password','$trade_name', '$description', '$patient_ssn')";
+    $sql = "INSERT INTO prescription (firstName, lastName, username, password)
+            VALUES ('$firstName', '$lastName', '$username', '$password')";
 
     if ($conn->query($sql) === TRUE) {
         $_SESSION["successMessage"] = "Prescription submitted successfully!";
@@ -30,6 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 ?>
+
+<!-- Rest of your HTML code remains unchanged -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col">
                 <div class="card mt-6">
                     <div class="card-header">
-                        <h2 class="display-6 text-center">Table of Prescriptions</h2>
+                        <h2 class="display-6 text-center">Table of Pharmacists</h2>
                     </div>
                     <div class="card-body">
                         <?php
@@ -73,12 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                         <table class="table table-bordered text-center">
                             <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                                 <th>Username</th>
                                 <th>Password</th>
-                                <th>Trade Name</th>
-                                <th>Description</th>
-                                <th>Patient SSN</th>
-                                <th>Actions</th>
+                                
                             </tr>
                             <?php
                             require("connection.php");
@@ -87,20 +88,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                 <tr>
+                                    <td><?php echo $row["firstName"]; ?></td>
+                                    <td><?php echo $row["lastName"]; ?></td>
                                     <td><?php echo $row["username"]; ?></td>
                                     <td><?php echo $row["password"]; ?></td>
-                                    <td><?php echo $row["trade_name"]; ?></td>
-                                    <td><?php echo $row['description']; ?></td>
-                                    <td><?php echo $row["patient_ssn"]; ?></td>
+
                                     <td>
                                         <form action="update_prescription.php" method="POST">
-                                            <input type="hidden" name="trade_name" value="<?php echo $row["trade_name"]; ?>">
+                                            <input type="hidden" name="username" value="<?php echo $row["username"]; ?>">
                                             <button type="submit" class="btn btn-sm btn-danger">Update</button>
                                         </form>
                                     </td>
                                     <td>
                                         <form action="delete_prescription.php" method="POST">
-                                            <input type="hidden" name="trade_name" value="<?php echo $row["trade_name"]; ?>">
+                                            <input type="hidden" name="username" value="<?php echo $row["username"]; ?>">
                                             <button type="submit" class="btn btn-sm btn-warning">Delete</button>
                                         </form>
                                     </td>

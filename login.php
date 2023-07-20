@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 exit();
             }
               elseif ($userType == 'pharmacist') {
-                header("Location: Prescription/prescription.php");
+                header("Location: Prescription/pharmacist_page.php");
                 exit();
             }
             elseif ($userType == 'admin') {
