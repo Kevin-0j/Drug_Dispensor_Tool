@@ -17,14 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username =$_POST["username"];
     $password =$_POST["password"];
     $tradename =$_POST["trade_name"];
+    $category =$_POST["category"];
+    $type =$_POST["type"];
+    $image =$_POST["image"];
+    $price =$_POST["price"];
     $drug_Id =$_POST["drug_id"];
     $quantity =$_POST["quantity"];
     $manufacture_date =$_POST["manufacture_date"];
     $expiryDate =$_POST["expiry_date"];
 
-    $sql = "INSERT INTO pharmaceutical (company_name, pharmaceuticalcomp_id, username, password, trade_name, drug_id, quantity, manufacture_date, expiry_date)
-    VALUES ('$company_name', '$pharmaceuticalcomp_id', '$username', '$password', '$tradename', '$drug_Id', '$quantity', '$manufacture_date', '$expiryDate')";
-
+    $sql = "INSERT INTO drugs (company_name, pharmaceuticalcomp_id, username, password, trade_name, category, type, image, price, drug_id, quantity, manufacture_date, expiry_date)
+    VALUES ('$company_name', '$pharmaceuticalcomp_id', '$username', '$password', '$tradename', '$category', '$type', '$image', '$price', '$drug_Id', '$quantity', '$manufacture_date', '$expiryDate')";
+    
 
 
 
@@ -83,6 +87,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <th>Username</th>
                                 <th>Password</th>
                                 <th>Trade Name</th>
+                                <th>Category</th>
+                                <th>Type</th>     
+                                <th>Image</th> 
+                                <th>Price</th> 
                                 <th>Drug ID</th>
                                 <th>Quantity</th>
                                 <th>Manufacture Date</th>
@@ -94,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </tr>
                             <?php
                             require("connection.php");
-                            $query = "SELECT * FROM pharmaceutical";
+                            $query = "SELECT * FROM drugs";
                             $result = mysqli_query($conn, $query);
                             while ($row = mysqli_fetch_assoc($result)) {
                              ?>
@@ -104,6 +112,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <td><?php echo $row['username']; ?></td>
                                     <td><?php echo $row['password']; ?></td>
                                     <td><?php echo $row['trade_name']; ?></td>
+                                    <td><?php echo $row['category']; ?></td>
+                                    <td><?php echo $row['type']; ?></td>
+                                    <td><?php echo $row['image']; ?></td>
+                                    <td><?php echo $row['price']; ?></td>
                                     <td><?php echo $row['drug_id']; ?></td>
                                     <td><?php echo $row['quantity']; ?></td>
                                     <td><?php echo $row['manufacture_date']; ?></td>

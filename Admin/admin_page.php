@@ -105,12 +105,13 @@ $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaul
             background-color: #f2f2f2;
         }
 
+       
         .user-info {
-      display: flex;
-      justify-content: flex-end; /* Align user info to the right */
-      padding: 10px;
-      align-items: center; /* Align items vertically */
-    }
+  display: flex;
+  justify-content: space-between; /* Updated to space-between */
+  padding: 10px;
+  align-items: center;
+}
     .profile-picture-container {
       display: flex;
       flex-direction: column;
@@ -146,6 +147,18 @@ $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaul
       cursor: pointer;
       font-size: 16px;
     }
+
+    
+.logout-link {
+  display: block;
+  color: red; /* Adjust the color as needed */
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.logout-link:hover {
+  color: darkred; /* Adjust the hover color as needed */
+}
     </style>
 </head>
 <body>
@@ -169,11 +182,16 @@ $displayPicturePath = isset($profilePicturePath) ? $profilePicturePath : $defaul
         <div class="title">Supervisors</div>
         <a href="supervisor.php" class="link">View Supervisors</a>
 
+        <a href="logout.php" class="logout-link">Logout</a>
+
+
+
         <?php if (isset($message)) { ?>
             <p><?php echo $message; ?></p>
         <?php } ?>
 
         <div class="user-info">
+        
 
             <div class="profile-picture-container">
                 <div class="profile-picture">

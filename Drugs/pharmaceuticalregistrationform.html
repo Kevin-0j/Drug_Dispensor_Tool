@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pharmaceutical Company Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      color: #333333;
+    }
+
+    form {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #666666;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      font-size: 14px;
+      color: #333333;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: #ffffff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2> Company and Drug Registration</h2>
+  <form action="pharmaceutical.php" method="post">
+    <label for="company_name">Company Name:</label> 
+    <input type="text" id="company_name" name="company_name" required><br><br>
+
+    <label for="pharmaceuticalcomp_id">Pharmaceutical Company ID:</label>
+    <input type="text" id="pharmaceuticalcomp_id" name="pharmaceuticalcomp_id" required><br><br>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br><br>
+
+    <label for="trade_name">Trade Name:</label>
+    <input type="text" id="trade_name" name="trade_name" required><br><br>
+
+    <label for="category">Category:</label>
+    <input type="text" name="category" required><br>
+
+    <label for="type">Type:</label>
+    <input type="text" name="type" required><br>
+
+    <label for="image">Image:</label>
+    <input type="file" name="image" accept="image/*" required><br>
+
+    <label for="price">Price:</label>
+    <input type="text" id="price" name="price" required><br><br>
+
+    <label for="drug_id">Drug ID:</label>
+    <input type="text" id="drug_id" name="drug_id" required><br><br>
+
+    <label for="quantity">Quantity:</label>
+    <input type="text" id="quantity" name="quantity" required><br><br>
+
+    <label for="manufacture_date">Manufacture Date:</label>
+    <input type="date" id="manufacture_date" name="manufacture_date" required><br><br>
+
+    <label for="expiry_date">Expiry Date:</label>
+    <input type="date" id="expiry_date" name="expiry_date" required><br><br>
+    
+
+    
+
+    
+
+    <input type="submit" value="Register">
+  </form>
+</body>
+</html>
