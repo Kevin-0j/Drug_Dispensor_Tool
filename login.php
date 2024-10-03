@@ -1,8 +1,9 @@
 <?php
 require "connection.php";
 session_start();
-
+//Meant for server adminstration CAT 1
 // Initialize error message
+//
 $error = '';
 
 // Handle login
@@ -19,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     } elseif ($userType == 'patient') {
         $table = 'patient';
     } elseif ($userType == 'pharmaceutical') {
-        $table = 'pharmaceutical';
+        $table = 'drugs';
     } elseif ($userType == 'supervisor') {
         $table = 'supervisor';
     }
@@ -47,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 header("Location: Patient/patient_page.php");
                 exit();
             } elseif ($userType == 'pharmaceutical') {
-                header("Location: Pharmaceutical/pharmaceutical_page.php");
+                header("Location: Drugs/dashboard.php");
                 exit();
             } elseif ($userType == 'supervisor') {
                 header("Location: Supervisor/supervisor_page.php");
@@ -153,6 +154,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     
     <?php if ($error !== '') { ?>
       <p style="color: red;"><?php echo $error; ?></p>
+
     <?php } ?>
   </form>
 </body>

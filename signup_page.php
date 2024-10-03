@@ -32,4 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['user_type'])) {
     echo "Invalid request";
     }
 }
+// Meant for server adminstration CAT 1
+
+
 ?>
